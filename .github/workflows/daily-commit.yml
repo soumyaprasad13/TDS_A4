@@ -1,26 +1,24 @@
-name: Daily Commit Bot
+name: Daily Commit
 
+# Schedule: Run every day at 01:30 AM UTC (adjust time as needed)
 on:
   schedule:
-    - cron: '13 3 * * *'  # runs daily at 03:13 UTC
-  workflow_dispatch:  # allow manual trigger too
+    - cron: '30 1 * * *'  # Run daily at 01:30 UTC (change as you want)
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        persist-credentials: false
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Configure Git
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-    - name: Add empty commit with email 23f3001525@ds.study.iitm.ac.in
-      run: |
-        git commit --allow-empty -m "Daily commit by workflow"
-        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+      - name: Commit changes by 23f3001525@ds.study.iitm.ac.in
+        run: |
+          # Create or update a file with current timestamp
+          echo "Last run: $(date)" >> last-run.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add last-run.txt
+          git commit -m "Daily commit by 23f3001525@ds.study.iitm.ac.in at $(date)" || echo "No changes to commit"
+          git push
