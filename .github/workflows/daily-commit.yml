@@ -2,8 +2,8 @@ name: Daily Commit Bot
 
 on:
   schedule:
-    - cron: '13 3 * * *'  # Daily at 03:13 UTC
-  workflow_dispatch:
+    - cron: '13 3 * * *'  # runs daily at 03:13 UTC
+  workflow_dispatch:  # allow manual trigger too
 
 jobs:
   daily-commit:
