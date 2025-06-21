@@ -2,7 +2,7 @@ name: Daily Commit Bot
 
 on:
   schedule:
-    - cron: '13 3 * * *'  # runs daily at 03:13 UTC
+    - cron: '13 3 * * *'  # Daily at 03:13 UTC
   workflow_dispatch:
 
 jobs:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        persist-credentials: false  # needed for manual token setup
+        persist-credentials: false
 
     - name: Configure Git
       run: |
